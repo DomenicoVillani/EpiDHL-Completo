@@ -1,0 +1,11 @@
+﻿@model EpiDHL.Models.Cliente
+
+<h3>Sei sicuro di voler eliminare questo utente @Model.Nome - @Model.Cognome ?</h3>
+
+@using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Cliente_ID)
+    <button type="submit" class="btn btn-danger">Si, elimina</button>
+    <a href="/" class="btn btn-success ml-2 ms-5">Annulla</a>
+}

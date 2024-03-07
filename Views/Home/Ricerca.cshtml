@@ -1,0 +1,41 @@
+﻿@model List<EpiDHL.Models.Cliente>
+
+@{
+    ViewBag.Title = "Ricerca";
+}
+
+<h2>Ricerca Cliente</h2>
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <h3>Risultati della ricerca:</h3>
+    <div class="row">
+        @foreach (var cliente in Model)
+        {
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cliente ID: @cliente.Cliente_ID</h5>
+                        <p class="card-text">Azienda: @cliente.Azienda</p>
+                        <p class="card-text">Codice Fiscale: @cliente.Cod_Fisc</p>
+                        <p class="card-text">Partita Iva: @cliente.PI</p>
+                        <p class="card-text">Nome: @cliente.Nome</p>
+                        <p class="card-text">Cognome: @cliente.Cognome</p>
+                        <p class="card-text">Tel: @cliente.Tel</p>
+                        <p class="card-text">Email: @cliente.Email</p>
+                        @Html.ActionLink("Dettagli", "Dettagli", "Home", new { id = cliente.Cliente_ID }, new { @class = "btn btn-outline-success" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+}

@@ -1,0 +1,63 @@
+﻿@model EpiDHL.Models.Cliente
+
+<h2>Modifica utente</h2>
+
+
+@{
+    bool isSubmitted = false;
+    if (Request.HttpMethod == "POST" && !ViewData.ModelState.IsValid)
+    {
+        isSubmitted = true;
+    }
+}
+
+@if (isSubmitted)
+{
+    @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+}
+
+
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post, new { @class = "row g-3" }))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Cliente_ID)
+
+
+    <div class="col-md-6">
+        <label class="form-label">@Html.LabelFor(m => m.Azienda)</label>
+        <div class="form-check">
+            @Html.CheckBoxFor(m => m.Azienda, new { @class = "form-check-input" })
+            <label class="form-check-label">Azienda/Cliente</label>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Cod_Fisc, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Cod_Fisc, new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.PI, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.PI, new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Tel, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Tel, new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Nome, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+    </div>
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.Cognome, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Cognome, new { @class = "form-control" })
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-info">Modifica</button>
+    </div>
+}

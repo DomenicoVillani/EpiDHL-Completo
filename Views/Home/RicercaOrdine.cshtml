@@ -1,0 +1,46 @@
+﻿
+@model List<EpiDHL.Models.Spedizioni>
+
+@{
+    ViewBag.Title = "Ricerca Ordine";
+}
+
+<h2>Ricerca Ordine</h2>
+
+@using (Html.BeginForm("RicercaOrdine", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="ricerca">Inserisci qui il tuo codice fiscale o la tua partita IVA:</label>
+        @Html.TextBox("ricerca", null, new { @class = "form-control", @maxlength = "16" })
+    </div>
+    <button type="submit" class="btn btn-primary">Cerca!</button>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Data Spedizione</th>
+                <th>Spedizione ID</th>
+                <th>Codice Spedizione</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var spedizione in Model)
+            {
+                <tr>
+                    <td>@spedizione.Data_Spedizione.ToShortDateString()</td>
+                    <td>@spedizione.Spedizione_ID</td>
+                    <td>@spedizione.Cod_Sped</td>
+                    <td>@Html.ActionLink("DettaglioOrdine", "DettaglioOrdine", "Home", new { id = spedizione.Spedizione_ID }, new { @class = "btn btn-outline-success" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nessun ordine trovato.</p>
+}

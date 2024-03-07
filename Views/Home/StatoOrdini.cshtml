@@ -1,0 +1,16 @@
+﻿@model List<EpiDHL.Models.Aggiornamenti>
+
+@{
+    ViewBag.Title = "Stato ordine";
+}
+
+<h2>Ricerca Ordine</h2>
+
+@using (Html.BeginForm("StatoOrdini", "Home", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="id">Inserisci qui l'ID dell'ordine:</label>
+        <input type="number" id="id" name="id" class="form-control" />
+        <button type="submit" class="btn btn-primary">Cerca!</button>
+    </div>
+}

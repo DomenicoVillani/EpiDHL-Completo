@@ -1,0 +1,107 @@
+﻿@model EpiDHL.Models.Cliente
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Aggiungi un nuovo cliente</h2>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#Azienda').change(function () {
+            if ($(this).is(':checked')) {
+                $('#Cod_FiscContainer').hide();
+                $('#PIContainer').show();
+                $('#Cod_Fisc').prop('disabled', true).val(''); // Disabilita e svuota Cod_Fisc
+                $('#PI').prop('disabled', false).val('Inserisci il nome dell\' azinda'); // Abilita e imposta valore per PI
+            } else {
+                $('#Cod_FiscContainer').show();
+                $('#PIContainer').hide();
+                $('#Cod_Fisc').prop('disabled', false).val('Inserisci Nome Cliente'); // Abilita e imposta valore per Cod_Fisc
+                $('#PI').prop('disabled', true).val(''); // Disabilita e svuota PI
+            }
+        });
+
+        // Assicurati di gestire lo stato iniziale del checkbox all'avvio della pagina
+        if ($('#Azienda').is(':checked')) {
+            $('#Cod_FiscContainer').hide();
+            $('#PIContainer').show();
+            $('#Cod_Fisc').prop('disabled', true).val(''); // Disabilita e svuota Cod_Fisc
+            $('#PI').prop('disabled', false).val('Inserisci il nome dell\' azinda'); // Abilita e imposta valore per PI
+        } else {
+            $('#Cod_FiscContainer').show();
+            $('#PIContainer').hide();
+            $('#Cod_Fisc').prop('disabled', false).val('Inserisci Nome Cliente'); // Abilita e imposta valore per Cod_Fisc
+            $('#PI').prop('disabled', true).val(''); // Disabilita e svuota PI
+        }
+    });
+</script>
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+
+@{
+    bool isSubmitted = false;
+    if (Request.HttpMethod == "POST" && !ViewData.ModelState.IsValid)
+    {
+        isSubmitted = true;
+    }
+}
+
+@if (isSubmitted)
+{
+    @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-group" id="AziendaContainer">
+        @Html.LabelFor(m => m.Azienda, new { @class = "form-label" })
+        <div class="form-check">
+            @Html.CheckBoxFor(m => m.Azienda, new { @class = "form-check-input", id = "Azienda" })
+            @Html.ValidationMessageFor(m => m.Azienda, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group" id="Cod_FiscContainer">
+        @Html.LabelFor(m => m.Cod_Fisc, new { htmlAttribute = new { @class = "form-label" } })
+        @Html.EditorFor(m => m.Cod_Fisc, new { htmlAttributes = new { @class = "form-control", id = "Cod_Fisc" } })
+        @Html.ValidationMessageFor(m => m.Cod_Fisc)
+    </div>
+
+    <div class="form-group" id="PIContainer" style="display:none;">
+        @Html.LabelFor(m => m.PI, new { htmlAttribute = new { @class = "form-label" } })
+        @Html.EditorFor(m => m.PI, new { htmlAttributes = new { @class = "form-control", id = "PI" } })
+        @Html.ValidationMessageFor(m => m.PI)
+    </div>
+
+    @Html.LabelFor(m => m.Email, new { htmlAttribute = new { @class = "form-label" } })
+    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(m => m.Email)
+
+    @Html.LabelFor(m => m.Tel, new { htmlAttribute = new { @class = "form-label" } })
+    @Html.EditorFor(m => m.Tel, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(m => m.Tel)
+
+    @Html.LabelFor(m => m.Nome, new { htmlAttribute = new { @class = "form-label" } })
+    @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(m => m.Nome)
+
+    @Html.LabelFor(m => m.Cognome, new { htmlAttribute = new { @class = "form-label" } })
+    @Html.EditorFor(m => m.Cognome, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(m => m.Cognome)
+
+
+
+    <button class="btn btn-primary">Submit</button>
+}
+
+

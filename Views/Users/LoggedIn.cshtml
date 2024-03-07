@@ -1,0 +1,20 @@
+﻿@model EpiDHL.Models.User
+@{
+    ViewBag.Title = "LoggedIn";
+}
+
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<h2>Sei Loggato</h2>
+
+<p>Le tue credenziali sono:</p>
+<p>Email: @ViewBag.Utente.Email</p>
+<p>Password: @ViewBag.Utente.Password</p>
+

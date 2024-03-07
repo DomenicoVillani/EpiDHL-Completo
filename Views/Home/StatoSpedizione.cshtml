@@ -1,0 +1,33 @@
+﻿@model List<EpiDHL.Models.Aggiornamenti>
+
+@{
+    ViewBag.Title = "StatoSpedizione";
+}
+
+<h2>StatoSpedizione</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID Aggiornamento</th>
+            <th>Stato</th>
+            <th>Luogo</th>
+            <th>Descrizione</th>
+            <th>Data Aggiornamento</th>
+            <th>ID Spedizione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aggiornamento in Model)
+        {
+            <tr>
+                <td>@aggiornamento.Aggiornamento_ID</td>
+                <td>@aggiornamento.Stato</td>
+                <td>@aggiornamento.Luogo</td>
+                <td>@aggiornamento.Descrizione</td>
+                <td>@aggiornamento.Data_Agg.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                <td>@aggiornamento.Spedizione_ID</td>
+            </tr>
+        }
+    </tbody>
+</table>

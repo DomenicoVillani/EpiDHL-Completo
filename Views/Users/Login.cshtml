@@ -1,0 +1,26 @@
+﻿@model EpiDHL.Models.User
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.LabelFor(model => model.Email)
+    @Html.EditorFor(model => model.Email)
+
+    @Html.LabelFor(model => model.Password)
+    @Html.EditorFor(model => model.Password)
+
+    <button class="btn btn-primary">Login</button>
+}

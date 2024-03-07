@@ -1,0 +1,53 @@
+﻿@using System.Web.Mvc.Html
+@model List<EpiDHL.Models.Cliente>
+
+
+<h2> Sei in index</h2>
+
+<table class="table table-primary table-hover text-center">
+    <thead>
+        <tr>
+            <th scope="col">Cliente ID</th>
+            <th scope="col">Azienda</th>
+            <th scope="col">Codice FIscale</th>
+            <th scope="col">Partita iva</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Cognome</th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th scope="col">Delete</th>
+                <th scope="col">Modifica</th>
+                <th scope="col">Dettagli</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td scope="col">@cliente.Cliente_ID</td>
+                <td scope="col">@cliente.Azienda</td>
+                <td scope="col">@cliente.Cod_Fisc</td>
+                <td scope="col">@cliente.PI</td>
+                <td scope="col">@cliente.Email</td>
+                <td scope="col">@cliente.Tel</td>
+                <td scope="col">@cliente.Nome</td>
+                <td scope="col">@cliente.Cognome</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td scope="col">
+                        @Html.ActionLink("Elimina ordine", "Delete", "Home", new { id = cliente.Cliente_ID }, new { @class = "btn btn-outline-danger" })
+                    </td>
+                    <td scope="col">
+                        @Html.ActionLink("Modifica ordine", "Edit", "Home", new { id = cliente.Cliente_ID }, new { @class = "btn btn-outline-info" })
+                    </td>
+                    <td scope="col">
+                        @Html.ActionLink("Dettagli ordine", "Dettagli", "Home", new { id = cliente.Cliente_ID }, new { @class = "btn btn-outline-success" })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

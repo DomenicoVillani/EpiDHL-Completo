@@ -1,0 +1,52 @@
+﻿@model EpiDHL.Models.Spedizioni
+@{
+    ViewBag.Title = "Dettaglio Ordine";
+}
+
+<div class="container">
+    <h2>Dettaglio Ordine</h2>
+    <hr />
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">ID Spedizione:</dt>
+                    <dd class="col-sm-8">@Model.Spedizione_ID</dd>
+
+                    <dt class="col-sm-4">Data Spedizione:</dt>
+                    <dd class="col-sm-8">@Model.Data_Spedizione.ToShortDateString()</dd>
+
+                    <dt class="col-sm-4">Codice Spedizione:</dt>
+                    <dd class="col-sm-8">@Model.Cod_Sped</dd>
+
+                    <dt class="col-sm-4">Peso:</dt>
+                    <dd class="col-sm-8">@Model.Peso</dd>
+
+                    <dt class="col-sm-4">Città Destinazione:</dt>
+                    <dd class="col-sm-8">@Model.Citta_Dest</dd>
+
+                    <dt class="col-sm-4">Indirizzo:</dt>
+                    <dd class="col-sm-8">@Model.Indirizzo</dd>
+
+                    <dt class="col-sm-4">Destinatario:</dt>
+                    <dd class="col-sm-8">@Model.Destinatario</dd>
+
+                    <dt class="col-sm-4">Costo:</dt>
+                    <dd class="col-sm-8">@Model.Costo</dd>
+
+                    <dt class="col-sm-4">Data Prevista:</dt>
+                    <dd class="col-sm-8">@Model.Data_Prev.ToShortDateString()</dd>
+
+                    <dt class="col-sm-4">ID Cliente:</dt>
+                    <dd class="col-sm-8">@Model.Cliente_ID</dd>
+                </dl>
+            </div>
+        </div>
+        @Html.ActionLink("Visualizza stato spedizione", "StatoSpedizione", "Home", new { id = Model.Spedizione_ID }, new { @class = "btn btn-outline-success" })
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">Nessun ordine trovato con l'ID specificato.</div>
+    }
+</div>

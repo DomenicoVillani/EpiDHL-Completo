@@ -1,0 +1,36 @@
+﻿@model EpiDHL.Models.Cliente
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+<h2>Dettagli</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+
+@if (Model.Cliente_ID == 0)
+{
+    <h2>Post non troato</h2>
+}
+else
+{
+    <h2>Azienda: @Model.Azienda</h2>
+
+    <h3>Nome: @Model.Nome</h3>
+
+    <h3>Cognome: @Model.Cognome</h3>
+
+    <h3>Codice Fiscale: @Model.Cod_Fisc</h3>
+
+    <h3>Partita IVA: @Model.PI</h3>
+
+    <h3>Email: @Model.Email</h3>
+
+    <h3>TEL: @Model.Tel</h3>
+}
+
